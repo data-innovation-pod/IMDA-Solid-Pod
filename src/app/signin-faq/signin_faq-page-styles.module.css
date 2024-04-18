@@ -1,0 +1,19 @@
+@tailwind components;
+
+@layer components {
+  .pageTitle {
+    @apply mb-6 text-4xl font-semibold;
+  }
+  .sectionTitle {
+    @apply mt-8 text-2xl font-bold;
+  }
+  .paraImage {
+    @apply my-6 w-[60%];
+  }
+  .paraText {
+    @apply mt-3;
+  }
+  .paraTextIndent {
+    @apply mt-3 indent-16;
+  }
+}

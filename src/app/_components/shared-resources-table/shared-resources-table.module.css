@@ -1,0 +1,57 @@
+@tailwind components;
+
+@layer components {
+  .table {
+    @apply min-w-full border-[1px] border-t-0 border-solid border-gray-200;
+  }
+
+  .tableHeaderUrl {
+    @apply w-[70%] cursor-pointer py-3 pl-10 text-left text-sm;
+  }
+
+  .tableHeaderOthers {
+    @apply w-[15%] cursor-pointer py-3 text-left text-sm;
+  }
+
+  .tableColumnUrl {
+    @apply w-[70%] cursor-pointer py-3 pl-10 text-left text-sm text-text-link;
+  }
+
+  .tableColumnUrlLink {
+    @apply hover:underline;
+  }
+
+  .tableColumnOthers {
+    @apply w-[15%] py-3 text-left text-xs text-grey-default;
+  }
+
+  .tableHeaderSpan {
+    @apply flex items-center gap-2;
+  }
+
+  .title {
+    @apply mb-2 text-gray-500;
+  }
+
+  .horizontalLine {
+    @apply mb-10 h-[1px] bg-gray-200;
+  }
+
+  .tableDiv {
+    @apply w-full overflow-x-auto;
+  }
+
+  .paginationDiv {
+    @apply flex justify-end border-[1px] border-t-0 border-solid border-gray-200 py-[5.5px] pr-4;
+  }
+
+  .borderBottomGrey {
+    @apply border-b-[1px] border-gray-200;
+  }
+  .titleText {
+    @apply text-center text-[16px] font-semibold leading-[22px];
+  }
+  .buttonContainer {
+    @apply flex justify-center gap-2;
+  }
+}

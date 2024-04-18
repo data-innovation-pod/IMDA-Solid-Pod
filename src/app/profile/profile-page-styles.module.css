@@ -1,0 +1,49 @@
+@tailwind components;
+
+@layer components {
+  .pageContainer {
+    @apply flex flex-col gap-y-[24px];
+  }
+  .breadcrumbSection {
+    @apply flex h-[36px] items-center text-text-lightest;
+  }
+  .profileSection {
+    @apply mb-4 flex items-center gap-x-[24px] text-[16px] leading-[16px] text-text-light;
+    .profileBtn {
+      @apply flex flex-col items-center gap-y-[10px];
+    }
+    .icon {
+      @apply h-[48px] w-[48px] rounded-full;
+    }
+    .nameContainer {
+      @apply flex flex-col gap-y-[5px];
+      .titleText {
+        @apply text-[16px] font-semibold leading-[22px];
+      }
+      .text {
+        @apply text-[14px] leading-[20px];
+      }
+    }
+  }
+  .editProfileSection {
+    @apply relative flex w-[70%] flex-col gap-y-[24px] text-[14px] leading-[20px] text-text-dark;
+    .editContainer {
+      @apply flex flex-col gap-y-[4px];
+      .errorMsg {
+        @apply hidden text-red-600;
+      }
+      .editInput {
+        @apply h-[48px] w-full rounded-[4px] border-[1px] border-grey-border border-b-grey-line p-[10px];
+      }
+    }
+    .actionsContainer {
+      @apply flex justify-end gap-x-[12px];
+    }
+    .popupModal {
+      @apply absolute left-[25%] top-[25%] flex w-[50%] flex-col gap-y-[30px] rounded-[4px] border-grey-border bg-white p-[16px] shadow-lg;
+      .modalText {
+        @apply text-center;
+      }
+    }
+  }
+}

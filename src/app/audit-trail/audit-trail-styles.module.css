@@ -1,0 +1,42 @@
+@tailwind components;
+
+@layer components {
+  .tableHeader {
+    @apply cursor-pointer py-3 pr-2 text-left text-sm font-semibold;
+  }
+
+  .tableHeaderSpan {
+    @apply flex items-center gap-2;
+  }
+
+  .tableColumnPrimary {
+    @apply break-words py-3 pr-2 text-sm;
+  }
+
+  .tableColumnOthers {
+    @apply break-words py-3 pr-2 text-xs text-grey-default;
+  }
+
+  .title {
+    @apply mb-10 text-gray-500;
+  }
+
+  .horizontalLine {
+    @apply mb-10 h-[1px] bg-gray-200;
+  }
+
+  .tableDiv {
+    @apply w-full overflow-x-auto;
+    .table {
+      @apply w-full table-fixed;
+    }
+  }
+
+  .paginationDiv {
+    @apply mt-16 flex justify-end;
+  }
+
+  .borderBottomGrey {
+    @apply border-b-[1px] border-gray-200;
+  }
+}

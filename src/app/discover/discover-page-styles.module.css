@@ -1,0 +1,13 @@
+@tailwind components;
+
+@layer components {
+  .title {
+    @apply mb-4 text-4xl font-bold text-purple-dark;
+  }
+  .desc {
+    @apply mb-10 max-w-4xl text-grey-dark;
+  }
+  .gridContainer {
+    @apply grid gap-5 [grid-template-columns:repeat(auto-fit,275px)];
+  }
+}

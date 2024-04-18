@@ -1,0 +1,54 @@
+@tailwind components;
+
+@layer components {
+  /* Modal */
+  .modalBackground {
+    @apply absolute left-0 top-0 h-screen w-screen items-center justify-center bg-black/25;
+  }
+  .modalContainer {
+    @apply max-h-[500px] w-1/2 min-w-[300px] max-w-[800px] overflow-y-scroll rounded-lg bg-white p-6;
+  }
+  .modalTitleContainer {
+    @apply mb-4 flex items-center justify-between;
+  }
+  .modalTitle {
+    @apply text-xl font-semibold;
+  }
+  .table {
+    @apply w-full;
+  }
+  .tableHeader {
+    @apply flex h-11 items-center bg-grey-light font-semibold;
+  }
+  .titleColumn {
+    @apply flex flex-1 items-center gap-2;
+  }
+  .lastModifiedColumn {
+    @apply basis-[20%];
+  }
+  .tableDataItem {
+    @apply flex h-11 items-center hover:cursor-pointer;
+  }
+  .radioButtonWrapper {
+    @apply flex w-9 items-center justify-center;
+  }
+  .radioButton {
+    @apply flex h-5 w-5 items-center justify-center rounded-full border border-purple-dark;
+  }
+  .enabledSelectFolderButton {
+    @apply rounded bg-purple-dark px-3 py-2 text-white;
+  }
+  .disabledSelectFolderButton {
+    @apply rounded bg-grey-light px-3 py-2 text-grey-medium-light;
+  }
+
+  /* Folder breadcrumb */
+  .breadcrumbContainer {
+    @apply flex gap-2;
+  }
+
+  /* Display breadcrumb */
+  .displayBreadcrumbContainer {
+    @apply flex h-8 w-fit cursor-pointer items-center rounded border px-2;
+  }
+}

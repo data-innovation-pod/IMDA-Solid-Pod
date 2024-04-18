@@ -1,0 +1,38 @@
+@tailwind components;
+
+@layer components {
+  .homeContainer {
+    @apply flex h-screen flex-col;
+  }
+  .mainContainer {
+    @apply flex h-full flex-row items-stretch;
+  }
+  .imageContainer {
+    @apply grow bg-cover bg-center;
+  }
+
+  .formBackground {
+    @apply flex grow basis-0 items-center justify-center;
+  }
+  .formContainer {
+    @apply flex w-90 flex-col items-stretch;
+  }
+  .logoContainer {
+    @apply mb-4 w-52 self-center;
+  }
+  .formTitle {
+    @apply mb-4 text-center text-4xl font-bold;
+  }
+  .formSubtitle {
+    @apply mb-12 self-center;
+  }
+  .loaderContainer {
+    @apply flex h-screen flex-col items-center justify-center gap-2;
+    .loader {
+      @apply h-10 w-10 animate-spin rounded-full border-4 border-solid border-t-purple-dark;
+    }
+  }
+  .errorPage {
+    @apply flex h-full items-center justify-center text-4xl text-red-500;
+  }
+}

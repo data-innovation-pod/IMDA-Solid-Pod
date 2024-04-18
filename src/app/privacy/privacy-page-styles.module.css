@@ -1,0 +1,13 @@
+@tailwind components;
+
+@layer components {
+  .mainNumberedItemContainer {
+    @apply mb-4 flex gap-x-2;
+  }
+  .nestedList {
+    @apply ml-10;
+    .nestedListItem {
+      @apply mb-2 list-outside list-disc;
+    }
+  }
+}

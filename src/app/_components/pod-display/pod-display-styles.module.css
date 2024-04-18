@@ -1,0 +1,106 @@
+@tailwind components;
+
+@layer components {
+  .resourceContainer {
+    @apply relative flex h-[42px] flex-row items-center gap-x-[10px] border-b-2;
+    .folderLinks,
+    .colHeader {
+      @apply flex items-center gap-2 font-bold;
+    }
+    .typeIconContainer {
+      @apply basis-[5%];
+    }
+    .resourceNameContainer,
+    .sharedResourceNameContainer {
+      @apply w-20 flex-1 basis-[48%] truncate;
+      .folderLinks {
+        @apply cursor-pointer;
+      }
+    }
+    .sharedResourceNameContainer {
+      @apply flex-grow;
+    }
+    .lastModifiedContainer {
+      @apply min-w-[120px] basis-[22%];
+    }
+    .typeTextContainer {
+      @apply flex min-w-[75px] basis-[10%];
+    }
+    .fileSizeContainer {
+      @apply flex min-w-[75px] basis-[10%];
+    }
+    .disabledActionsContainer {
+      @apply flex h-[32px] min-w-[32px] basis-[5%] items-center justify-center rounded-[4px];
+    }
+    .actionsContainer {
+      @apply flex h-[32px] min-w-[32px] basis-[5%] items-center justify-center rounded-[4px];
+      &:hover {
+        @apply bg-grey-bckgrd;
+      }
+    }
+    .contactNameContainer {
+      @apply basis-[30%];
+    }
+    .contactWebIdContainer {
+      @apply basis-[60%];
+    }
+    .dropdownMenuContainer {
+      @apply absolute right-[0] top-[100%] z-[5];
+      .dropdownMenuInner {
+        @apply flex w-[230px] flex-col gap-y-[6px] rounded-md border-2 bg-white p-[6px];
+        .menuItem {
+          @apply flex items-center;
+        }
+        .menuItemWithBorder {
+          @apply flex items-center border-t-2;
+        }
+        .menuItemIcon {
+          @apply mr-[8px];
+        }
+      }
+    }
+    .smallIcon {
+      @apply h-[30px] w-[30px];
+    }
+    .profileImage {
+      @apply h-[30px] w-[30px] max-w-none rounded-full;
+    }
+    .smallWidthIcon {
+      @apply w-[30px];
+    }
+    .show {
+      @apply absolute right-[20px] top-full z-[5] flex w-[240px] flex-col gap-y-[6px] rounded-md border-2 bg-white p-[6px];
+    }
+  }
+  .contactsModalContainer {
+    @apply fixed left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-slate-400 bg-opacity-40;
+    .modalInner {
+      @apply flex min-h-[200px] min-w-[60%] flex-col rounded-[20px] border-2 bg-white px-[30px] py-[20px];
+      .closeModal {
+        @apply cursor-pointer text-right;
+      }
+      .profileContainer {
+        @apply flex h-full flex-grow flex-col justify-evenly;
+        .contentsSection {
+          @apply flex items-center gap-x-[16px];
+          .icon {
+            @apply h-[52px] w-[52px];
+          }
+          .roundedIcon {
+            @apply h-[52px] w-[52px] rounded-full;
+          }
+        }
+        .titleText {
+          @apply text-[16px] font-semibold leading-[22px];
+        }
+        .text {
+          @apply text-[14px] leading-[20px];
+        }
+      }
+    }
+  }
+
+  .paginationDiv {
+    @apply flex justify-end border-gray-200 py-4 pr-4;
+  }
+}

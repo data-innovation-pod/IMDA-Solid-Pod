@@ -1,0 +1,121 @@
+@tailwind components;
+
+@layer components {
+  .navBar {
+    @apply min-h-screen w-1/6 min-w-[170px] max-w-[250px] flex-none border px-2;
+  }
+  .navBarLinks,
+  .navBarLinksActive {
+    @apply block rounded-md px-3 py-2 text-gray-600;
+  }
+  .navBarLinksActive {
+    @apply bg-gray-100 text-purple-dark;
+  }
+  .linksContainer {
+    @apply flex flex-col gap-1;
+  }
+  .registerButton {
+    @apply rounded bg-purple-light px-2 py-1 font-semibold text-purple-dark;
+  }
+  .buttonContainer {
+    @apply flex flex-row items-center gap-x-[5px];
+  }
+  .breadcrumbsContainer {
+    @apply flex h-[36px] items-center;
+    .breadcrumbLink {
+      @apply capitalize text-grey-default;
+      .caret {
+        @apply mx-[5px];
+      }
+    }
+  }
+  .commandBarContainer {
+    @apply relative flex h-[44px] flex-row items-center justify-end gap-x-[15px] border-b-2;
+    .createFolderModalContainer {
+      @apply absolute right-0 top-[100%] z-10;
+      .inner {
+        @apply flex min-w-[280px] flex-col gap-y-[10px] rounded-md border-2 bg-white p-[16px];
+      }
+    }
+    .addContactModalContainer,
+    .uploadFileErrorModalContainer {
+      @apply absolute right-0 top-[100%] z-10;
+      .inner {
+        @apply flex w-[480px] flex-col gap-y-[10px] rounded-md border-2 bg-white p-[16px];
+      }
+    }
+    .uploadFileErrorModalContainer {
+      @apply bg-white p-[12px] shadow-lg;
+      .closeModal {
+        @apply mb-[5px] cursor-pointer text-right;
+      }
+    }
+  }
+  .sidebarNav {
+    @apply fixed h-full max-h-[calc(100vh-var(--header-height))] w-[20vw] min-w-sidebar max-w-sidebar px-2 py-6 shadow-xl;
+    .podLogo {
+      @apply mb-[56px] ml-4 w-16;
+      .logo {
+        @apply h-[80px] w-[80px];
+      }
+    }
+    .linksMenu {
+      @apply flex flex-col gap-1;
+      .link,
+      .activeLink {
+        @apply flex gap-5 rounded-md px-3 py-2 text-gray-600;
+      }
+      .activeLink {
+        @apply bg-gray-100 text-purple-dark;
+      }
+    }
+  }
+  .sidebarNavPadder {
+    @apply min-w-sidebar max-w-sidebar shrink-0 grow-0 basis-[20vw];
+  }
+  .headerNav {
+    @apply sticky top-0 z-[3] flex w-full items-center justify-between gap-5 bg-purple-dark px-2 py-2 text-white;
+    .linksMenu {
+      @apply flex gap-3;
+      .link {
+        @apply flex h-full w-12 cursor-pointer items-center justify-center;
+      }
+    }
+    .icon {
+      @apply h-[32px] w-[32px] rounded-full;
+    }
+    .midIcon {
+      @apply h-[20px] w-[20px] rotate-180;
+    }
+    .smallIcon {
+      @apply h-[16px] w-[16px];
+    }
+    .profileDropdown {
+      @apply absolute right-[20px] top-[100%] z-50;
+      .profileDropdownInner {
+        @apply flex flex-col rounded-md border-2 bg-white p-[12px] text-text-light shadow-lg;
+        .profileContainer {
+          @apply mb-3 flex items-center gap-2;
+          .profileText {
+            @apply gap-2;
+            .titleText {
+              @apply text-[14px] font-semibold leading-[20px];
+            }
+            .text {
+              @apply text-[12px] leading-[16px];
+            }
+          }
+        }
+        .menuItem {
+          @apply flex w-full cursor-pointer items-center gap-x-[8px] p-[6px];
+        }
+        .menuItemWithBorder {
+          @apply flex w-full cursor-pointer items-center justify-between border-t-2 p-[6px];
+        }
+      }
+    }
+  }
+  .footer {
+    @apply flex h-[var(--footer-height)] items-center gap-6 bg-grey-dark px-4 py-4 text-sm text-white;
+  }
+}

@@ -1,0 +1,18 @@
+@tailwind components;
+
+@layer components {
+  .accordionTitleDiv {
+    @apply flex w-full items-center gap-2 bg-[#F1EBF4] p-[10px];
+    .iconContainer {
+      @apply cursor-pointer;
+    }
+  }
+
+  .accordionUserName {
+    @apply text-base font-semibold;
+  }
+
+  .accordionUserWebId {
+    @apply text-sm;
+  }
+}

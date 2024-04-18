@@ -1,0 +1,28 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  AWS_SSH_KEY: $AWS_SSH_KEY
+  AWS_INSTANCE_IP: $AWS_INSTANCE_IP
+  APP_NAME: "your-nextjs-app"
+
+before_script:
+
+build:
+  stage: build
+  only:
+    - production
+  script:
+    - npm ci
+    - npm run build
+
+deploy:
+  stage: deploy
+  only:
+    - production # Deploy only on changes to production branch
+  script:
+    # Copy the build to the EC2 instance
+    - scp -i $AWS_SSH_KEY -o StrictHostKeyChecking=no -r ./out/* ec2-user@$AWS_INSTANCE_IP:/var/www/$APP_NAME
+    # Restart the Node.js app on the EC2 instance
+    - ssh -i $AWS_SSH_KEY -o StrictHostKeyChecking=no ec2-user@$AWS_INSTANCE_IP "sudo systemctl restart $APP_NAME"

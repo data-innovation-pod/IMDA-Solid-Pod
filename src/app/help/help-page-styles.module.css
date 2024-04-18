@@ -1,0 +1,40 @@
+@tailwind components;
+
+@layer components {
+  .sectionTitleContainer {
+    @apply mb-4 mt-8 flex items-center gap-x-2;
+  }
+  .sectionTitle {
+    @apply text-xl font-bold;
+  }
+  .subSectionTitle {
+    @apply my-4 text-lg font-bold;
+  }
+  .paraText {
+    @apply my-3;
+  }
+  .paraUnderlineText {
+    @apply my-3 underline;
+  }
+  .paraNumberedText {
+    @apply ml-4 mt-1;
+  }
+  .listBulletedText {
+    @apply mt-1 list-disc;
+  }
+  .paraList {
+    @apply ml-9 mt-1;
+  }
+  .listContainer {
+    @apply ml-4 mt-1 flex gap-x-2;
+  }
+  .nestedListContainer {
+    @apply ml-9 mt-1 flex gap-x-2;
+  }
+  .nestedList {
+    @apply ml-10;
+    .nestedListItem {
+      @apply mb-2 list-outside list-disc;
+    }
+  }
+}

@@ -1,0 +1,123 @@
+@tailwind components;
+
+@layer components {
+  .detailColumnPadder {
+    @apply min-w-detail-column max-w-detail-column basis-[20vw];
+  }
+  .detailColumnContainer {
+    @apply fixed right-0 h-full max-h-[calc(100vh-var(--header-height))] w-[20vw] shadow-xl;
+
+    .detailColumnTitleContainer {
+      @apply mb-5 flex items-center justify-between;
+    }
+    .docTypeContainer {
+      @apply mb-2 flex h-11 items-center justify-start gap-3;
+    }
+    .divider {
+      @apply mb-4 h-px bg-grey-light;
+    }
+    .editUserContainer {
+      @apply mb-3 flex justify-between gap-2;
+      .button {
+        @apply flex flex-col items-center justify-center;
+      }
+    }
+    .editUserDesc {
+      @apply mb-2 text-sm;
+    }
+    .usersContainer {
+      @apply mb-2 max-h-[148px] overflow-y-auto;
+    }
+    .personIconWrapper {
+      @apply h-6 w-6;
+    }
+    .userItemContainer {
+      @apply flex h-11 items-center gap-3;
+    }
+    .userItemName {
+      @apply truncate text-sm font-semibold;
+    }
+  }
+
+  .editModalBackground {
+    @apply absolute left-0 top-0 h-screen w-screen items-center justify-center bg-black/25 text-left;
+    .editModalContainer {
+      @apply w-1/2 min-w-[300px] max-w-[800px] rounded-lg bg-white p-6 shadow-xl;
+      .titleContainer {
+        @apply mb-4 flex justify-between;
+      }
+      .title {
+        @apply text-xl font-semibold;
+      }
+      .roleContainer {
+        @apply mb-4 flex items-center gap-2;
+      }
+
+      .tableContainer {
+        @apply mb-4 w-full;
+        .tableBody {
+          @apply block max-h-[210px] overflow-y-auto;
+        }
+      }
+      .tableRow {
+        @apply flex h-11 items-center text-grey-dark;
+      }
+      .selectionColHeader {
+        @apply basis-16 text-center;
+      }
+      .nameColHeader {
+        @apply basis-[30%];
+      }
+      .webIdColHeader {
+        @apply flex-1;
+      }
+      .selectionColBody {
+        @apply flex basis-16 items-center justify-center;
+      }
+      .nameColBody {
+        @apply flex w-2 grow-0 basis-[30%] items-center justify-start gap-2;
+      }
+      .webIdColBody {
+        @apply w-2 flex-1 truncate;
+      }
+      .selectionButton {
+        @apply flex h-4 w-4 items-center justify-center rounded-full border-grey-line;
+      }
+
+      .iconContainer {
+        @apply flex h-10 w-10 items-center justify-center rounded-full bg-grey-light;
+      }
+      .primaryButton {
+        @apply rounded bg-purple-dark px-3 py-2 text-white;
+      }
+      .secondaryButton {
+        @apply rounded border border-grey-border px-3 py-2 text-grey-dark;
+      }
+      .disabledButton {
+        @apply rounded border border-grey-border px-3 py-2 text-grey-medium-light;
+      }
+    }
+  }
+
+  .profileImage {
+    @apply h-6 w-6 rounded-full object-cover;
+  }
+  .editPermissionInputContainer {
+    @apply mb-1 flex h-9 justify-between rounded-lg border-[1px];
+    .input {
+      @apply basis-[93%] px-[10px] focus:outline-none;
+    }
+    .inputIcon {
+      @apply flex basis-[7%] justify-center;
+    }
+  }
+  .selectOptionsList {
+    @apply max-h-[120px] overflow-y-auto rounded-lg border-[1px] p-[10px];
+    .listItem {
+      @apply py-[2px];
+      &:hover {
+        @apply rounded-md bg-sky-100;
+      }
+    }
+  }
+}

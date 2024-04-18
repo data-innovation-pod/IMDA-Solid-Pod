@@ -1,0 +1,46 @@
+version: "3.8"
+services:
+  db:
+    container_name: db_container
+    image: postgres:14.6
+    networks:
+      - bridge
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      TZ: GMT+8
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres:/var/lib/postgresql/data
+      - ./src/resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+    expose:
+      - "5432"
+  app:
+    container_name: solid_container
+    networks:
+      - bridge
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: ${DB_PROD_HOST}
+      DB_PORT: ${DB_PROD_PORT}
+      DB_CLIENT: ${DB_CLIENT}
+      DB_NAME: ${DB_PROD_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+    depends_on:
+      - db
+    ports:
+      - "3001:3001"
+    expose:
+      - 3001
+volumes:
+  postgres:
+  app:
+networks:
+  bridge:

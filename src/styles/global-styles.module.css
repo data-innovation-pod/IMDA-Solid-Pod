@@ -1,0 +1,41 @@
+@tailwind components;
+
+@layer components {
+  .mainContainer {
+    @apply grow p-12;
+  }
+  .pageContainer {
+    @apply flex min-h-[calc(100vh-var(--header-height)-var(--footer-height))];
+  }
+  .primaryButton,
+  .primaryButtonInactive {
+    @apply rounded-[4px] bg-purple-dark px-[12px] py-[5px] text-[14px] font-semibold leading-[20px] text-white;
+  }
+  .primaryButtonInactive {
+    @apply opacity-50;
+  }
+  .secondaryButton {
+    @apply rounded-[4px] border-[1px] border-grey-border px-[12px] py-[5px] text-[14px] font-semibold leading-[20px] text-text-dark;
+  }
+  .textInput {
+    @apply min-h-[38px] flex-grow rounded-md border-2 px-[10px] focus:outline-none;
+  }
+  .errorMsg {
+    @apply text-red-600;
+  }
+  .pageTitle {
+    @apply mb-6 text-4xl font-semibold;
+  }
+  .sectionTitle {
+    @apply mt-8 text-xl font-bold;
+  }
+  .linkText {
+    @apply text-blue-700;
+  }
+  .loaderContainer {
+    @apply flex h-screen w-screen flex-col items-center justify-center gap-2;
+    .loader {
+      @apply h-10 w-10 animate-spin rounded-full border-4 border-solid border-t-purple-dark;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+@tailwind components;
+
+@layer components {
+  .selectInputContainer {
+    @apply relative mb-4;
+    .selectInputContent {
+      @apply grow pb-0 text-left;
+    }
+    .selectInputButton {
+      @apply flex h-12 w-full items-center rounded px-3 outline outline-1 outline-grey-dark;
+    }
+    .selecInputDropdown {
+      @apply absolute left-0 top-[calc(100%+12px)] z-50 w-full rounded border border-solid border-grey-light bg-white;
+    }
+    .selectInputDropdownItem {
+      @apply flex h-12 w-full items-center px-3 text-left;
+    }
+    .selectInputDropdownItem:hover {
+      @apply bg-grey-light;
+    }
+  }
+
+  .primaryButton {
+    @apply mb-4 rounded bg-purple-dark py-3 text-white;
+  }
+  .secondaryButton {
+    @apply mb-4 rounded border border-purple-dark py-3 text-purple-dark;
+  }
+}
