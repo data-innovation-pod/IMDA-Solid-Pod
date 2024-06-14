@@ -28,9 +28,15 @@ const PROVIDERS = [
 ];
 
 export default function LoginForm() {
-  const [selectedProvider, setSelectedProvider] = useState<Provider>(
-    PROVIDERS.find((item) => item.oidcIssuer === localStorage.getItem("css_provider")) ?? PROVIDERS[0]!
-  );
+  const [selectedProvider, setSelectedProvider] = useState<Provider>(PROVIDERS[0]!);
+  useEffect(() => {
+    //    PROVIDERS.find((item) => item.oidcIssuer === localStorage.getItem("css_provider")) ?? PROVIDERS[0]!
+    const storedProvider = localStorage.getItem("css_provider");
+    if (storedProvider) {
+      const foundProvider = PROVIDERS.find((item) => item.oidcIssuer === storedProvider);
+      if (foundProvider) setSelectedProvider(foundProvider);
+    }
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("css_provider", selectedProvider.oidcIssuer);

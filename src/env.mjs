@@ -28,6 +28,12 @@ export const env = createEnv({
     YOUTUBE_CLIENT_ID: z.string(),
     YOUTUBE_CLIENT_SECRET: z.string(),
     YOUTUBE_TOKEN_URL: z.string(),
+
+    FITBIT_API_BASE_URL: z.string(),
+    FITBIT_AUTH_URL: z.string(),
+    FITBIT_CLIENT_ID: z.string(),
+    FITBIT_CLIENT_SECRET: z.string(),
+    FITBIT_TOKEN_URL: z.string(),
   },
 
   /**
@@ -51,6 +57,11 @@ export const env = createEnv({
     NEXT_PUBLIC_YOUTUBE_CLIENT_ID: z.string(),
     NEXT_PUBLIC_YOUTUBE_CLIENT_SECRET: z.string(),
     NEXT_PUBLIC_YOUTUBE_TOKEN_URL: z.string(),
+
+    NEXT_PUBLIC_FITBIT_AUTH_URL: z.string(),
+    NEXT_PUBLIC_FITBIT_CLIENT_ID: z.string(),
+    NEXT_PUBLIC_FITBIT_CLIENT_SECRET: z.string(),
+    NEXT_PUBLIC_FITBIT_TOKEN_URL: z.string(),
   },
 
   /**
@@ -74,6 +85,12 @@ export const env = createEnv({
     YOUTUBE_CLIENT_SECRET: process.env.YOUTUBE_CLIENT_SECRET,
     YOUTUBE_TOKEN_URL: process.env.YOUTUBE_TOKEN_URL,
 
+    FITBIT_API_BASE_URL: process.env.FITBIT_API_BASE_URL,
+    FITBIT_AUTH_URL: process.env.FITBIT_AUTH_URL,
+    FITBIT_CLIENT_ID: process.env.FITBIT_CLIENT_ID,
+    FITBIT_CLIENT_SECRET: process.env.FITBIT_CLIENT_SECRET,
+    FITBIT_TOKEN_URL: process.env.FITBIT_TOKEN_URL,
+
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
     NEXT_PUBLIC_CSS_BASE_URL: process.env.NEXT_PUBLIC_CSS_BASE_URL,
     NEXT_PUBLIC_CSS_BASE_URL_2: process.env.NEXT_PUBLIC_CSS_BASE_URL_2,
@@ -95,6 +112,11 @@ export const env = createEnv({
     NEXT_PUBLIC_YOUTUBE_CLIENT_SECRET: process.env.NEXT_PUBLIC_YOUTUBE_CLIENT_SECRET,
     NEXT_PUBLIC_YOUTUBE_TOKEN_URL: process.env.NEXT_PUBLIC_YOUTUBE_TOKEN_URL,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
+
+    NEXT_PUBLIC_FITBIT_AUTH_URL: process.env.NEXT_PUBLIC_FITBIT_AUTH_URL,
+    NEXT_PUBLIC_FITBIT_CLIENT_ID: process.env.NEXT_PUBLIC_FITBIT_CLIENT_ID,
+    NEXT_PUBLIC_FITBIT_CLIENT_SECRET: process.env.NEXT_PUBLIC_FITBIT_CLIENT_SECRET,
+    NEXT_PUBLIC_FITBIT_TOKEN_URL: process.env.NEXT_PUBLIC_FITBIT_TOKEN_URL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.

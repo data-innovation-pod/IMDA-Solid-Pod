@@ -3,6 +3,7 @@ import { createTRPCProxyClient, loggerLink, unstable_httpBatchStreamLink } from 
 import { type AppRouter } from "~/server/api/root";
 import { getUrl, transformer } from "./shared";
 
+//create type safety between client and server
 export const api = createTRPCProxyClient<AppRouter>({
   transformer,
   links: [

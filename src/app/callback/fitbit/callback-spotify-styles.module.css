@@ -1,0 +1,19 @@
+@tailwind components;
+
+@layer components {
+  .dividerWithTopBottomMargin {
+    @apply my-6 h-[1px] bg-[#EDEBE9];
+  }
+
+  .podUrl {
+    @apply cursor-pointer text-[#115EA3] hover:underline;
+  }
+
+  .mainTitle {
+    @apply text-[32px] font-bold;
+  }
+
+  .subTitle {
+    @apply mb-6 text-[24px] font-bold;
+  }
+}

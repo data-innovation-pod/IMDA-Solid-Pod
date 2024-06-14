@@ -1,0 +1,102 @@
+@tailwind components;
+
+@layer components {
+  /* Card */
+  .cardContainer {
+    @apply flex flex-col border shadow-md;
+  }
+
+  .logoContainer {
+    @apply flex h-48 items-center justify-center bg-blue-light px-5;
+  }
+
+  .contentContainer {
+    @apply flex grow flex-col px-3 pt-3;
+  }
+
+  .title {
+    @apply mb-2 font-medium text-purple-dark;
+  }
+
+  .desc {
+    @apply mb-2 line-clamp-3 grow text-sm font-medium;
+  }
+
+  .text {
+    @apply text-sm text-gray-700;
+  }
+
+  .listItem {
+    @apply before:inline-block before:w-4 before:text-center before:font-bold before:text-purple-dark before:content-['•'];
+  }
+
+  .divider {
+    @apply block h-px bg-gray-100;
+  }
+
+  /* Button */
+  .connectButton {
+    @apply flex items-center gap-2 self-end p-3;
+  }
+
+  .connectText {
+    @apply text-right font-medium text-purple-dark;
+  }
+
+  .radioButton {
+    @apply flex h-4 w-4 items-center justify-center rounded-full border border-purple-dark;
+  }
+
+  .radioButtonContent {
+    @apply radioButton;
+  }
+
+  /* Modal */
+  .modalBackground {
+    @apply absolute left-0 top-0 h-screen w-screen items-center justify-center bg-black/25;
+  }
+
+  .modalContainer {
+    @apply w-1/2 min-w-[300px] max-w-[800px] rounded-lg bg-white p-6 shadow-xl;
+  }
+
+  .modalTitle {
+    @apply mb-4 text-xl font-semibold;
+  }
+
+  .importForm {
+    @apply mb-4 ml-2 flex flex-col;
+  }
+
+  .folderButtonContainer {
+    @apply mb-4 flex items-center gap-2 rounded border border-solid border-grey-border px-3 py-1;
+  }
+
+  .folderIconWrapper {
+    @apply flex h-5 w-5 items-center justify-center;
+  }
+
+  .importAndCancelButtonContainer {
+    @apply flex justify-end gap-2;
+  }
+
+  .enabledImportButton {
+    @apply cursor-pointer rounded bg-purple-dark px-2 py-1 text-white;
+  }
+
+  .disabledImportButton {
+    @apply pointer-events-none cursor-default rounded bg-grey-light px-2 py-1 text-grey-medium-light;
+  }
+
+  .modalCancelButton {
+    @apply cursor-pointer rounded border border-solid border-grey-border px-2 py-1;
+  }
+
+  .formItem {
+    @apply flex h-6 gap-2;
+  }
+
+  .inputContainer {
+    @apply w-4 rounded-full border-purple-dark accent-purple-dark;
+  }
+}

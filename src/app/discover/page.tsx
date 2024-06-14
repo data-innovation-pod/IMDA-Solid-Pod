@@ -1,4 +1,6 @@
 import { YouTubeLogo, SpotifyLogo } from "../_assets/svg";
+import FitbitLogo from "../_assets/svg/fitbit-logo";
+import FitbitCard from "../_components/connector/fitbit/fitbit-card";
 import SpotifyCard from "../_components/connector/spotify/spotify-card";
 import YouTubeCard from "../_components/connector/youtube/youtube-card";
 
@@ -21,6 +23,11 @@ export default function Discover() {
           desc="Connect and choose what data to retrieve from your YouTube account."
           logo={<YouTubeLogo />}
           title="YouTube"
+        />
+        <FitbitCard
+          desc="Connect and choose what data to retrieve from your Fitbit account."
+          logo={<FitbitLogo />}
+          title="Fitbit"
         />
       </div>
     </>

@@ -100,6 +100,8 @@ function Paragraphs({ paraText }: ParagraphsProps) {
   ));
 }
 
+// maybe use <Link href="/about">About</Link> (import Link from "next/link") (similar to react router, but in react, <Link to="">)
+// this is soft navigation, not full refresh, only swapping out content
 export default function HelpPage() {
   return (
     <>

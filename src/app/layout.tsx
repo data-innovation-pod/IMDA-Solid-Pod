@@ -1,4 +1,5 @@
 import "~/styles/globals.css";
+import { Metadata } from "next";
 
 import { Inter } from "next/font/google";
 import { headers } from "next/headers";
@@ -11,7 +12,7 @@ const inter = Inter({
   variable: "--font-sans",
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "IMDA Monorepo",
 };
 

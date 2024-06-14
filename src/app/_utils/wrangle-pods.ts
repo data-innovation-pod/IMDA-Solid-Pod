@@ -340,11 +340,14 @@ export async function createSharedFolder(currentLocation: string, folderName: st
 
 // this is only useful when want to ignore the very first segment path
 export function getCurrentLocation(rootPodUrl: string | undefined) {
-  const locationBarUrl = new URL(window.location.href);
-  const locationBarSegments = locationBarUrl.pathname.split("/");
-  const editedSegment = locationBarSegments.slice(2).join("/");
-  const currentLocation = editedSegment ? `${rootPodUrl}${editedSegment}/` : rootPodUrl;
-  return currentLocation;
+  if (typeof window !== "undefined") {
+    const locationBarUrl = new URL(window.location.href);
+    const locationBarSegments = locationBarUrl.pathname.split("/");
+    const editedSegment = locationBarSegments.slice(2).join("/");
+    const currentLocation = editedSegment ? `${rootPodUrl}${editedSegment}/` : rootPodUrl;
+    return currentLocation;
+  }
+  return "";
 }
 
 export async function uploadResource(currentLocation: string, uploadedFile: File, webId: string, sharerWebId?: string) {

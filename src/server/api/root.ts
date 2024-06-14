@@ -4,6 +4,7 @@ import { auditRouter } from "./routers/audit";
 import { userConnectedServiceRouter } from "./routers/user_connected_services";
 import { spotifyRouter } from "./routers/spotify";
 import { youtubeRouter } from "./routers/youtube";
+import { fitbitRouter } from "./routers/fitbit";
 
 /**
  * This is the primary router for your server.
@@ -16,6 +17,7 @@ export const appRouter = createTRPCRouter({
   userConnectedService: userConnectedServiceRouter,
   spotify: spotifyRouter,
   youtube: youtubeRouter,
+  fitbit: fitbitRouter,
 });
 
 // export type definition of API

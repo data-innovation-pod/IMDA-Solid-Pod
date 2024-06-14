@@ -1,14 +1,18 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import SpotifySelectionModal, { type SpotifySelectionModalHandle } from "./spotify-modal";
 
 import styles from "./spotify-styles.module.css";
 
 export function SpotifyConnectButton() {
-  const spotify_access_token = localStorage.getItem("spotify_access_token");
-
+  const [spotifyAccessToken, setSpotifyAccessToken] = useState<string | null>(null);
   const SpotifySelectionModalRef = useRef<SpotifySelectionModalHandle>(null);
+
+  useEffect(() => {
+    const spotifyAccessTokenFromStorage = localStorage.getItem("spotify_access_token");
+    setSpotifyAccessToken(spotifyAccessTokenFromStorage);
+  }, []);
 
   function handleClick() {
     SpotifySelectionModalRef.current?.show();
@@ -21,7 +25,7 @@ export function SpotifyConnectButton() {
         onClick={handleClick}
         className={styles.connectButton}>
         <p className={styles.connectText}>Connect</p>
-        <div className={styles.radioButton}>{spotify_access_token && <div className={styles.radioButtonContent} />}</div>
+        <div className={styles.radioButton}>{spotifyAccessToken && <div className={styles.radioButtonContent} />}</div>
       </button>
       <SpotifySelectionModal ref={SpotifySelectionModalRef} />
     </>

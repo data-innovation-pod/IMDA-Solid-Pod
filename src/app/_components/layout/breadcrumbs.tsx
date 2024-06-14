@@ -2,6 +2,7 @@
 import { usePathname } from "next/navigation";
 import styles from "./layout-styles.module.css";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Breadcrumbs() {
   /* breadcrumb uses app url to navigate between pages... 
@@ -10,18 +11,21 @@ export default function Breadcrumbs() {
   (ii) http://localhost:3001/<rootPodUrl>/contacts/contactsInner1/ci5/ciii1/
   but when link to (i), the page function, NestedYourDataPages(), will convert (i) to (ii) before calling CSS to getSolidDataSet
   */
-  const fullPathUrl = new URL(window.location.href);
-  const segments = fullPathUrl.pathname.split("/").filter((item) => item ?? item);
+  const [fullPathUrl, setFullPathUrl] = useState<URL | null>(null);
+  useEffect(() => {
+    setFullPathUrl(new URL(window.location.href));
+  }, []);
+  const segments = fullPathUrl?.pathname.split("/").filter((item) => item ?? item);
   let pathSegment = "";
   const mapSegmentToUrlArray: string[] = [];
-  segments.forEach((item, index) => {
+  segments?.forEach((item, index) => {
     pathSegment += `${item}/`;
-    mapSegmentToUrlArray[index] = `${fullPathUrl.origin}/${pathSegment}`;
+    mapSegmentToUrlArray[index] = `${fullPathUrl?.origin}/${pathSegment}`;
   });
 
   return (
     <div className={styles.breadcrumbsContainer}>
-      {segments.map((crumb, index) => {
+      {segments?.map((crumb, index) => {
         const crumbUrl = mapSegmentToUrlArray[index];
         let display = "";
         switch (crumb) {

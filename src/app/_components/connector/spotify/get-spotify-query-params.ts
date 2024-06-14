@@ -30,12 +30,13 @@ export async function getSpotifyQueryParams() {
   }
   const challenge = await generateSpotifyCodeChallenge(verifier);
 
+  //URLSearchParams to retrieve url parameters, check 16:20 video
   return new URLSearchParams({
     client_id: env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID,
+    response_type: "code",
+    redirect_uri: env.NEXT_PUBLIC_BASE_URL,
+    scope: "user-read-private user-read-email user-library-read user-top-read user-follow-read",
     code_challenge_method: "S256",
     code_challenge: challenge,
-    redirect_uri: env.NEXT_PUBLIC_BASE_URL,
-    response_type: "code",
-    scope: "user-read-private user-read-email user-library-read user-top-read user-follow-read",
   }).toString();
 }

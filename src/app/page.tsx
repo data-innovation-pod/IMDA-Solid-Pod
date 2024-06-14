@@ -3,11 +3,16 @@
 import { PodLogo } from "./_assets/svg";
 import { LoginForm } from "./_components/home";
 import { Footer } from "./_components/layout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./home-styles.module.css";
 
 export default function Login() {
-  const [currentSession] = useState<string>(typeof window !== "undefined" ? localStorage.getItem("solidClientAuthn:currentSession") ?? "" : "");
+  const [currentSession, setCurrentSession] = useState<string>("");
+
+  useEffect(() => {
+    const session = localStorage.getItem("solidClientAuthn:currentSession") ?? "";
+    setCurrentSession(session);
+  }, []);
 
   if (currentSession.length > 0) {
     return (

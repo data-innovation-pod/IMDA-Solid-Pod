@@ -15,12 +15,12 @@ export default function DisplayBreadcrumb({ baseLabel, paths }: DisplayBreadcrum
     <div className={styles.displayBreadcrumbContainer}>
       <PurpleFolderIcon />
       <div>{baseLabel}</div>
-      {paths.map((path) => {
+      {paths.map((path, index) => {
         return (
-          <>
+          <div key={index}>
             <Chevron direction="right" />
             <div>{path}</div>
-          </>
+          </div>
         );
       })}
     </div>

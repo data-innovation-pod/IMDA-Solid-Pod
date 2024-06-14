@@ -13,14 +13,21 @@ import Link from "next/link";
 export default function Spotify() {
   const router = useRouter();
   const [accessToken, setAccessToken] = useState<string>("");
-  const [podUrlLink] = useState<string>(localStorage.getItem("podUrlLink") ?? "");
+  const [podUrlLink, setPodUrlLink] = useState<string>("");
   const [completedItemsSentences, setCompletedItemsSentences] = useState<string[]>([]);
-  const importingItemsString = localStorage.getItem("import_items") ?? "";
-  const [importingItems] = useState<string[]>(importingItemsString.split(","));
+  const [importingItems, setImportingItems] = useState<string[]>([]);
   const { webId, podUrl } = useGlobalContext();
 
-  const code = localStorage.getItem("code");
-  const verifier = localStorage.getItem("verifier");
+  useEffect(() => {
+    const podUrlLinkFromStorage = localStorage.getItem("podUrlLink") ?? "";
+    setPodUrlLink(podUrlLinkFromStorage);
+
+    const importingItemsString = localStorage.getItem("import_items") ?? "";
+    setImportingItems(importingItemsString.split(","));
+  }, []);
+
+  const code = typeof window !== "undefined" ? localStorage.getItem("code") : "";
+  const verifier = typeof window !== "undefined" ? localStorage.getItem("verifier") : "";
   const getTokenInfo = api.spotify.getTokenInfo.useQuery(
     { code: code, verifier },
     {
