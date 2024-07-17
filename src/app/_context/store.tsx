@@ -7,7 +7,7 @@ import { handleIncomingRedirect } from "@inrupt/solid-client-authn-browser";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { logIn } from "../_utils";
 import { env } from "~/env.mjs";
-import { type SpotifyTokenInfo } from "~/types/TokenInfo";
+import { type FitbitTokenInfo, type SpotifyTokenInfo } from "~/types/TokenInfo";
 import { getProfileImage, viewContactProfile } from "../_utils/wrangle-pods";
 import { type DocumentInfo } from "~/types/SolidData";
 import { setCookiesWithPrefix, deleteCookies, setLocalStorageFromCookies } from "../_utils/storage";
@@ -15,6 +15,8 @@ import { setCookiesWithPrefix, deleteCookies, setLocalStorageFromCookies } from 
 interface ContextProps {
   spotifyTokenInfo?: SpotifyTokenInfo;
   setSpotifyTokenInfo: Dispatch<SetStateAction<SpotifyTokenInfo | undefined>>;
+  fitbitTokenInfo?: FitbitTokenInfo;
+  setFitbitTokenInfo: Dispatch<SetStateAction<FitbitTokenInfo | undefined>>;
   podUrl?: string;
   setPodUrl?: Dispatch<SetStateAction<string>>;
   webId?: string;
@@ -28,6 +30,8 @@ interface ContextProps {
 const GlobalContext = createContext<ContextProps>({
   spotifyTokenInfo: undefined,
   setSpotifyTokenInfo: (): SpotifyTokenInfo | undefined => undefined,
+  fitbitTokenInfo: undefined,
+  setFitbitTokenInfo: (): FitbitTokenInfo | undefined => undefined,
   podUrl: undefined,
   webId: undefined,
 });
@@ -41,6 +45,7 @@ export function GlobalContextProvider({ children }: { children: ReactNode }) {
     { name: string | undefined; email?: string | undefined; imageUrl?: string; imageFile?: File } | undefined
   >(undefined);
   const [spotifyTokenInfo, setSpotifyTokenInfo] = useState<SpotifyTokenInfo | undefined>();
+  const [fitbitTokenInfo, setFitbitTokenInfo] = useState<FitbitTokenInfo | undefined>();
   const [sharedResourcesStructure, setSharedResourcesStructure] = useState<DocumentInfo | undefined>(undefined);
   const pathname = usePathname();
   const router = useRouter();
@@ -123,6 +128,10 @@ export function GlobalContextProvider({ children }: { children: ReactNode }) {
         await logIn(currentLocation);
       }
     }
+    if (localStorage.getItem("can_fetch_fitbit") === "true") {
+      router.push("/callback/fitbit");
+      return;
+    }
 
     if (localStorage.getItem("can_fetch_youtube") === "true") {
       router.push("/callback/youtube");
@@ -145,6 +154,8 @@ export function GlobalContextProvider({ children }: { children: ReactNode }) {
     () => ({
       spotifyTokenInfo,
       setSpotifyTokenInfo,
+      fitbitTokenInfo,
+      setFitbitTokenInfo,
       podUrl,
       webId,
       userDetails,
@@ -152,7 +163,18 @@ export function GlobalContextProvider({ children }: { children: ReactNode }) {
       sharedResourcesStructure,
       setSharedResourcesStructure,
     }),
-    [spotifyTokenInfo, setSpotifyTokenInfo, podUrl, webId, userDetails, setUserDetails, sharedResourcesStructure, setSharedResourcesStructure]
+    [
+      spotifyTokenInfo,
+      setSpotifyTokenInfo,
+      fitbitTokenInfo,
+      setFitbitTokenInfo,
+      podUrl,
+      webId,
+      userDetails,
+      setUserDetails,
+      sharedResourcesStructure,
+      setSharedResourcesStructure,
+    ]
   );
 
   return <GlobalContext.Provider value={contextValue}>{children}</GlobalContext.Provider>;

@@ -52,7 +52,8 @@ function Input({ label, value, onChange }: InputProps) {
 const availableImports = [
   "Sleep",
   "Friends",
-  "Food and Water Logs",
+  "Food",
+  "Water",
   "Temperature",
   "Devices",
   "Heart Rate",
@@ -85,14 +86,16 @@ const FitbitSelectionModal = forwardRef<FitbitSelectionModalHandle>(function Fit
 
   const handleImportClick = async () => {
     localStorage.setItem("can_fetch_fitbit", "true");
-    // localStorage.removeItem("code"); //to remove the code saved for CSS when logged in
     const accessToken = localStorage.getItem("fitbit_access_token");
+    console.log({ accessToken });
     const expiresAt = localStorage.getItem("fitbit_expires_at");
     localStorage.setItem("podUrlLink", `${podUrl}${confirmedPath?.join("")}`);
     localStorage.setItem("import_items", imports.join(","));
     if (accessToken && accessToken.length > 0 && expiresAt && expiresAt.length > 0 && Number(expiresAt) > moment().unix() * 1000) {
+      console.log("accessToken exists");
       window.location.href = env.NEXT_PUBLIC_BASE_URL;
     } else {
+      console.log("accessToken does not exist");
       const queryParamsString = await getFitbitQueryParams();
       router.push(`${env.NEXT_PUBLIC_FITBIT_AUTH_URL}?${queryParamsString}`);
     }
@@ -105,7 +108,6 @@ const FitbitSelectionModal = forwardRef<FitbitSelectionModalHandle>(function Fit
     } else {
       updatedImports.push(value);
     }
-    console.log("updatedImports: ", updatedImports);
     setImports(updatedImports);
   };
 

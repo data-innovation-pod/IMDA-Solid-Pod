@@ -19,6 +19,7 @@ type FitbitTokenInfo = {
   refresh_token: string;
   scope: string;
   token_type: string;
+  user_id: string;
 };
 
 export type { SpotifyTokenInfo, YouTubeTokenInfo, FitbitTokenInfo };

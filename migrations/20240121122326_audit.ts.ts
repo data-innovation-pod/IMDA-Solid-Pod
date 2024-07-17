@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/consistent-type-imports */
 import { Knex } from "knex";
 
 export async function up(knex: Knex): Promise<void> {

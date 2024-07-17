@@ -32,8 +32,11 @@ export const fitbitRouter = createTRPCRouter({
   getTokenInfo: publicProcedure
     .input(
       z.object({
+        client_id: z.string().nullable(),
+        client_secret: z.string().nullable(),
         code: z.string().nullable(),
-        verifier: z.string().nullable(),
+        code_verifier: z.string().nullable(),
+        grant_type: z.string().nullable(),
       })
     )
     .output(
@@ -46,7 +49,10 @@ export const fitbitRouter = createTRPCRouter({
       })
     )
     .query(async ({ input }) => {
-      if (!input.code && !input.verifier) {
+      console.log("before fitbit querying, input: ", input);
+      const base64 = btoa(`${input.client_id}:${input.client_secret}`);
+      console.log({ base64 });
+      if (!input.code && !input.code_verifier) {
         throw new TRPCError({
           code: "BAD_REQUEST",
           message: "Code and verifier are null or undefined",
@@ -58,29 +64,30 @@ export const fitbitRouter = createTRPCRouter({
           message: "Code is null or undefined",
         });
       }
-      if (!input.verifier) {
+      if (!input.code_verifier) {
         throw new TRPCError({
           code: "BAD_REQUEST",
           message: "Verifier is null or undefined",
         });
       }
-
+      console.log("code in url is: ", input.code);
       const result = await fetch(env.FITBIT_TOKEN_URL, {
         method: "POST",
         headers: {
+          Authorization: `Basic ${base64}`,
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams({
           code: input.code,
           client_id: env.FITBIT_CLIENT_ID,
-          client_secret: env.FITBIT_CLIENT_SECRET,
+          // client_secret: env.FITBIT_CLIENT_SECRET,
           grant_type: "authorization_code",
           redirect_uri: env.NEXT_PUBLIC_BASE_URL,
-          code_verifier: input.verifier,
+          code_verifier: input.code_verifier,
         }),
       });
       const data = (await result.json()) as FitbitTokenInfo & FitbitError;
-
+      console.log("data: ", data);
       if (data.error) {
         throw new TRPCError({
           code: "BAD_REQUEST",
@@ -104,7 +111,9 @@ export const fitbitRouter = createTRPCRouter({
           Authorization: `Bearer ${input.access_token}`,
         },
       });
+      console.log("result: ", result);
       const data = (await result.json()) as Sleep;
+      console.log("after json: ", data);
       return data;
     }),
   getFriends: publicProcedure
@@ -120,7 +129,9 @@ export const fitbitRouter = createTRPCRouter({
           Authorization: `Bearer ${input.access_token}`,
         },
       });
+      console.log("results of friends: ", result);
       const data = (await result.json()) as Friends;
+      console.log("data of friends: ", data);
       return data;
     }),
   getFoodLog: publicProcedure

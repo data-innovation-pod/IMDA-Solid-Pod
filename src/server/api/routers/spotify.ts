@@ -32,6 +32,10 @@ export const spotifyRouter = createTRPCRouter({
       })
     )
     .query(async ({ input }) => {
+      if (input.code && input.verifier) {
+        console.log("code and verifier exists");
+      }
+
       if (!input.code && !input.verifier) {
         throw new TRPCError({
           code: "BAD_REQUEST",
@@ -65,7 +69,11 @@ export const spotifyRouter = createTRPCRouter({
           code_verifier: input.verifier,
         }),
       });
+      console.log({ result });
       const data = (await result.json()) as SpotifyTokenInfo & SpotifyError;
+      if (data.access_token && data.refresh_token) {
+        console.log("obtained access token and refresh token");
+      }
 
       if (data.error) {
         throw new TRPCError({
@@ -84,7 +92,9 @@ export const spotifyRouter = createTRPCRouter({
       })
     )
     .query(async ({ input }) => {
+      console.log("querying playlists");
       if (!input.access_token) {
+        console.log("no access token");
         throw new TRPCError({
           code: "BAD_REQUEST",
           message: "access_token cannot be null or undefined",
@@ -92,6 +102,7 @@ export const spotifyRouter = createTRPCRouter({
       }
 
       if (!input.podUrl) {
+        console.log("no podurl");
         throw new TRPCError({
           code: "BAD_REQUEST",
           message: "podUrl cannot be null or undefined",
@@ -104,8 +115,9 @@ export const spotifyRouter = createTRPCRouter({
           Authorization: `Bearer ${input.access_token}`,
         },
       });
+      console.log("before data, result is: ", result);
       const data = (await result.json()) as ListResponse<Playlist>;
-
+      console.log("result/data is: ", data);
       return data;
     }),
   getProfile: publicProcedure

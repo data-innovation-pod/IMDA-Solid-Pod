@@ -15,23 +15,40 @@ export default function Fitbit() {
   //access token to be used for fetching data from fitbit
   const [accessToken, setAccessToken] = useState<string>("");
   //podUrlLink to be used for saving data into pod
-  const [podUrlLink] = useState<string>(localStorage.getItem("podUrlLink") ?? "");
+  const [podUrlLink, setPodUrlLink] = useState<string>("");
   //completedItemsSentences to show the user what data has been imported
   const [completedItemsSentences, setCompletedItemsSentences] = useState<string[]>([]);
   //importingItems to be used for fetching data from fitbit
-  const importingItemsString = localStorage.getItem("import_items") ?? "";
-  const [importingItems] = useState<string[]>(importingItemsString.split(","));
+  const [importingItems, setImportingItems] = useState<string[]>([]);
   const { webId, podUrl } = useGlobalContext();
 
-  const code = localStorage.getItem("code");
-  const verifier = localStorage.getItem("verifier");
+  useEffect(() => {
+    console.log("starting to import fitbit items");
+    const podUrlLinkFromStorage = localStorage.getItem("podUrlLink") ?? "";
+    setPodUrlLink(podUrlLinkFromStorage);
+
+    const importingItemsString = localStorage.getItem("import_items") ?? "";
+    setImportingItems(importingItemsString.split(","));
+  }, []);
+
+  const code = typeof window !== "undefined" ? localStorage.getItem("code") : "";
+  const code_verifier = typeof window !== "undefined" ? localStorage.getItem("verifier") : "";
+  console.log("code is: ", code, " , verifier is: ", code_verifier);
   const getTokenInfo = api.fitbit.getTokenInfo.useQuery(
-    { code: code, verifier },
+    {
+      client_id: process.env.NEXT_PUBLIC_FITBIT_CLIENT_ID ?? null,
+      client_secret: process.env.NEXT_PUBLIC_FITBIT_CLIENT_SECRET ?? null,
+      code: code,
+      code_verifier,
+      grant_type: "authorization_code",
+    },
     {
       enabled: false,
       retry: 0,
     }
   );
+
+  console.log("gettokeninfo.data: ", getTokenInfo.data);
 
   const connectToServices = api.userConnectedService.updateOrCreateMyConnectedService.useMutation();
 
@@ -160,6 +177,7 @@ export default function Fitbit() {
   useEffect(() => {
     if (getFriends.isFetched && webId) {
       if (!getFriends.data) return;
+      console.log("getFriends.data: ", getFriends.data);
       void writeDataIntoPod(podUrlLink ?? "", "friends", getFriends.data ? [getFriends.data] : [], webId).then(() => {
         setCompletedItemsSentences([...completedItemsSentences, "Friends data has been imported."]);
       });
@@ -280,16 +298,68 @@ export default function Fitbit() {
 
   useEffect(() => {
     const fetchFitbitData = async () => {
-      if (importingItems.includes("Playlists")) {
-        await sleep(1000);
-        await getSleepLog.refetch();
-        await sleep(2500);
-      }
       if (importingItems.includes("Sleep")) {
         await sleep(1000);
         await getSleepLog.refetch();
         await sleep(2500);
       }
+      if (importingItems.includes("Friends")) {
+        await sleep(1000);
+        await getFriends.refetch();
+        await sleep(2500);
+      }
+      if (importingItems.includes("Food")) {
+        await sleep(1000);
+        await getFoodLog.refetch();
+        await sleep(2500);
+      }
+      if (importingItems.includes("Water")) {
+        await sleep(1000);
+        await getWaterLog.refetch();
+        await sleep(2500);
+      }
+      if (importingItems.includes("Temperature")) {
+        await sleep(1000);
+        await getTemperatureCore.refetch();
+        await sleep(2500);
+      }
+      if (importingItems.includes("Devices")) {
+        await sleep(1000);
+        await getDevices.refetch();
+        await sleep(2500);
+      }
+      if (importingItems.includes("Heart Rate")) {
+        await sleep(1000);
+        await getHeartRate.refetch();
+        await sleep(2500);
+      }
+      if (importingItems.includes("Profile")) {
+        await sleep(1000);
+        await getProfile.refetch();
+        await sleep(2500);
+      }
+      if (importingItems.includes("Breathing Rate")) {
+        await sleep(1000);
+        await getBreathingRate.refetch();
+        await sleep(2500);
+      }
+      if (importingItems.includes("Activities")) {
+        await sleep(1000);
+        await getDailyActivity.refetch();
+        await sleep(2500);
+      }
+      if (importingItems.includes("Oxygen Saturation")) {
+        await sleep(1000);
+        await getOxygenSaturation.refetch();
+        await sleep(2500);
+      }
+      if (importingItems.includes("Weight")) {
+        await sleep(1000);
+        await getWeightLog.refetch();
+        await sleep(2500);
+      }
+      localStorage.removeItem("import_items");
+      localStorage.removeItem("can_fetch_fitbit");
     };
 
     const canFetchFitbit = localStorage.getItem("can_fetch_fitbit") ?? "";
