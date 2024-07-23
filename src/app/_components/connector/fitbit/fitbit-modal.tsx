@@ -51,16 +51,16 @@ function Input({ label, value, onChange }: InputProps) {
 }
 const availableImports = [
   "Sleep",
-  "Friends",
+  // "Friends",
   "Food",
   "Water",
-  "Temperature",
-  "Devices",
-  "Heart Rate",
+  // "Temperature",
+  // "Devices",
+  // "Heart Rate",
   "Profile",
-  "Breathing Rate",
-  "Activities",
-  "Oxygen Saturation",
+  // "Breathing Rate",
+  // "Activities",
+  // "Oxygen Saturation",
   "Weight",
 ];
 const FitbitSelectionModal = forwardRef<FitbitSelectionModalHandle>(function FitbitSelectionModal(props, ref) {
@@ -87,15 +87,12 @@ const FitbitSelectionModal = forwardRef<FitbitSelectionModalHandle>(function Fit
   const handleImportClick = async () => {
     localStorage.setItem("can_fetch_fitbit", "true");
     const accessToken = localStorage.getItem("fitbit_access_token");
-    console.log({ accessToken });
     const expiresAt = localStorage.getItem("fitbit_expires_at");
     localStorage.setItem("podUrlLink", `${podUrl}${confirmedPath?.join("")}`);
     localStorage.setItem("import_items", imports.join(","));
     if (accessToken && accessToken.length > 0 && expiresAt && expiresAt.length > 0 && Number(expiresAt) > moment().unix() * 1000) {
-      console.log("accessToken exists");
       window.location.href = env.NEXT_PUBLIC_BASE_URL;
     } else {
-      console.log("accessToken does not exist");
       const queryParamsString = await getFitbitQueryParams();
       router.push(`${env.NEXT_PUBLIC_FITBIT_AUTH_URL}?${queryParamsString}`);
     }

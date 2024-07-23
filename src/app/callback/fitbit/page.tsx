@@ -23,7 +23,6 @@ export default function Fitbit() {
   const { webId, podUrl } = useGlobalContext();
 
   useEffect(() => {
-    console.log("starting to import fitbit items");
     const podUrlLinkFromStorage = localStorage.getItem("podUrlLink") ?? "";
     setPodUrlLink(podUrlLinkFromStorage);
 
@@ -33,22 +32,18 @@ export default function Fitbit() {
 
   const code = typeof window !== "undefined" ? localStorage.getItem("code") : "";
   const code_verifier = typeof window !== "undefined" ? localStorage.getItem("verifier") : "";
-  console.log("code is: ", code, " , verifier is: ", code_verifier);
   const getTokenInfo = api.fitbit.getTokenInfo.useQuery(
     {
       client_id: process.env.NEXT_PUBLIC_FITBIT_CLIENT_ID ?? null,
       client_secret: process.env.NEXT_PUBLIC_FITBIT_CLIENT_SECRET ?? null,
       code: code,
       code_verifier,
-      grant_type: "authorization_code",
     },
     {
       enabled: false,
       retry: 0,
     }
   );
-
-  console.log("gettokeninfo.data: ", getTokenInfo.data);
 
   const connectToServices = api.userConnectedService.updateOrCreateMyConnectedService.useMutation();
 
@@ -85,12 +80,13 @@ export default function Fitbit() {
     { enabled: false }
   );
 
-  const getFriends = api.fitbit.getFriends.useQuery(
-    {
-      access_token: accessToken ?? "",
-    },
-    { enabled: false }
-  );
+  // TODO: Uncomment this when the endpoint is ready
+  // const getFriends = api.fitbit.getFriends.useQuery(
+  //   {
+  //     access_token: accessToken ?? "",
+  //   },
+  //   { enabled: false }
+  // );
 
   const getFoodLog = api.fitbit.getFoodLog.useQuery(
     {
@@ -106,26 +102,28 @@ export default function Fitbit() {
     { enabled: false }
   );
 
-  const getTemperatureCore = api.fitbit.getTemperatureCore.useQuery(
-    {
-      access_token: accessToken ?? "",
-    },
-    { enabled: false }
-  );
+  // const getTemperatureCore = api.fitbit.getTemperatureCore.useQuery(
+  //   {
+  //     access_token: accessToken ?? "",
+  //   },
+  //   { enabled: false }
+  // );
 
-  const getDevices = api.fitbit.getDevices.useQuery(
-    {
-      access_token: accessToken ?? "",
-    },
-    { enabled: false }
-  );
+  // TODO: Uncomment this when the endpoint is ready
+  // const getDevices = api.fitbit.getDevices.useQuery(
+  //   {
+  //     access_token: accessToken ?? "",
+  //   },
+  //   { enabled: false }
+  // );
 
-  const getHeartRate = api.fitbit.getHeartRate.useQuery(
-    {
-      access_token: accessToken ?? "",
-    },
-    { enabled: false }
-  );
+  // TODO: Uncomment this when the endpoint is ready
+  // const getHeartRate = api.fitbit.getHeartRate.useQuery(
+  //   {
+  //     access_token: accessToken ?? "",
+  //   },
+  //   { enabled: false }
+  // );
 
   const getProfile = api.fitbit.getProfile.useQuery(
     {
@@ -134,26 +132,29 @@ export default function Fitbit() {
     { enabled: false }
   );
 
-  const getBreathingRate = api.fitbit.getBreathingRate.useQuery(
-    {
-      access_token: accessToken ?? "",
-    },
-    { enabled: false }
-  );
+  // TODO: Uncomment this when the endpoint is ready
+  // const getBreathingRate = api.fitbit.getBreathingRate.useQuery(
+  //   {
+  //     access_token: accessToken ?? "",
+  //   },
+  //   { enabled: false }
+  // );
 
-  const getDailyActivity = api.fitbit.getDailyActivity.useQuery(
-    {
-      access_token: accessToken ?? "",
-    },
-    { enabled: false }
-  );
+  // TODO: Uncomment this when the endpoint is ready
+  // const getDailyActivity = api.fitbit.getDailyActivity.useQuery(
+  //   {
+  //     access_token: accessToken ?? "",
+  //   },
+  //   { enabled: false }
+  // );
 
-  const getOxygenSaturation = api.fitbit.getOxygenSaturation.useQuery(
-    {
-      access_token: accessToken ?? "",
-    },
-    { enabled: false }
-  );
+  // TODO: Uncomment this when the endpoint is ready
+  // const getOxygenSaturation = api.fitbit.getOxygenSaturation.useQuery(
+  //   {
+  //     access_token: accessToken ?? "",
+  //   },
+  //   { enabled: false }
+  // );
 
   const getWeightLog = api.fitbit.getWeightLog.useQuery(
     {
@@ -174,16 +175,15 @@ export default function Fitbit() {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getSleepLog.isFetched]);
 
-  useEffect(() => {
-    if (getFriends.isFetched && webId) {
-      if (!getFriends.data) return;
-      console.log("getFriends.data: ", getFriends.data);
-      void writeDataIntoPod(podUrlLink ?? "", "friends", getFriends.data ? [getFriends.data] : [], webId).then(() => {
-        setCompletedItemsSentences([...completedItemsSentences, "Friends data has been imported."]);
-      });
-    }
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getFriends.isFetched]);
+  // useEffect(() => {
+  //   if (getFriends.isFetched && webId) {
+  //     if (!getFriends.data) return;
+  //     void writeDataIntoPod(podUrlLink ?? "", "friends", getFriends.data ? [getFriends.data] : [], webId).then(() => {
+  //       setCompletedItemsSentences([...completedItemsSentences, "Friends data has been imported."]);
+  //     });
+  //   }
+  //   //eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [getFriends.isFetched]);
 
   useEffect(() => {
     if (getFoodLog.isFetched && webId) {
@@ -205,35 +205,35 @@ export default function Fitbit() {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getWaterLog.isFetched]);
 
-  useEffect(() => {
-    if (getTemperatureCore.isFetched && webId) {
-      if (!getTemperatureCore.data) return;
-      void writeDataIntoPod(podUrlLink ?? "", "temperature", getTemperatureCore.data ? [getTemperatureCore.data] : [], webId).then(() => {
-        setCompletedItemsSentences([...completedItemsSentences, "Temperature data has been imported."]);
-      });
-    }
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getTemperatureCore.isFetched]);
+  // useEffect(() => {
+  //   if (getTemperatureCore.isFetched && webId) {
+  //     if (!getTemperatureCore.data) return;
+  //     void writeDataIntoPod(podUrlLink ?? "", "temperature", getTemperatureCore.data ? [getTemperatureCore.data] : [], webId).then(() => {
+  //       setCompletedItemsSentences([...completedItemsSentences, "Temperature data has been imported."]);
+  //     });
+  //   }
+  //   //eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [getTemperatureCore.isFetched]);
 
-  useEffect(() => {
-    if (getDevices.isFetched && webId) {
-      if (!getDevices.data) return;
-      void writeDataIntoPod(podUrlLink ?? "", "devices", getDevices.data ? [getDevices.data] : [], webId).then(() => {
-        setCompletedItemsSentences([...completedItemsSentences, "Devices data has been imported."]);
-      });
-    }
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getDevices.isFetched]);
+  // useEffect(() => {
+  //   if (getDevices.isFetched && webId) {
+  //     if (!getDevices.data) return;
+  //     void writeDataIntoPod(podUrlLink ?? "", "devices", getDevices.data ? [getDevices.data] : [], webId).then(() => {
+  //       setCompletedItemsSentences([...completedItemsSentences, "Devices data has been imported."]);
+  //     });
+  //   }
+  //   //eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [getDevices.isFetched]);
 
-  useEffect(() => {
-    if (getHeartRate.isFetched && webId) {
-      if (!getHeartRate.data) return;
-      void writeDataIntoPod(podUrlLink ?? "", "heartRate", getHeartRate.data ? [getHeartRate.data] : [], webId).then(() => {
-        setCompletedItemsSentences([...completedItemsSentences, "Heart Rate data has been imported."]);
-      });
-    }
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getHeartRate.isFetched]);
+  // useEffect(() => {
+  //   if (getHeartRate.isFetched && webId) {
+  //     if (!getHeartRate.data) return;
+  //     void writeDataIntoPod(podUrlLink ?? "", "heartRate", getHeartRate.data ? [getHeartRate.data] : [], webId).then(() => {
+  //       setCompletedItemsSentences([...completedItemsSentences, "Heart Rate data has been imported."]);
+  //     });
+  //   }
+  //   //eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [getHeartRate.isFetched]);
 
   useEffect(() => {
     if (getProfile.isFetched && webId) {
@@ -245,35 +245,35 @@ export default function Fitbit() {
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getProfile.isFetched]);
 
-  useEffect(() => {
-    if (getBreathingRate.isFetched && webId) {
-      if (!getBreathingRate.data) return;
-      void writeDataIntoPod(podUrlLink ?? "", "breathingRate", getBreathingRate.data ? [getBreathingRate.data] : [], webId).then(() => {
-        setCompletedItemsSentences([...completedItemsSentences, "Breathing Rate data has been imported."]);
-      });
-    }
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getBreathingRate.isFetched]);
+  // useEffect(() => {
+  //   if (getBreathingRate.isFetched && webId) {
+  //     if (!getBreathingRate.data) return;
+  //     void writeDataIntoPod(podUrlLink ?? "", "breathingRate", getBreathingRate.data ? [getBreathingRate.data] : [], webId).then(() => {
+  //       setCompletedItemsSentences([...completedItemsSentences, "Breathing Rate data has been imported."]);
+  //     });
+  //   }
+  //   //eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [getBreathingRate.isFetched]);
 
-  useEffect(() => {
-    if (getDailyActivity.isFetched && webId) {
-      if (!getDailyActivity.data) return;
-      void writeDataIntoPod(podUrlLink ?? "", "dailyActivity", getDailyActivity.data ? [getDailyActivity.data] : [], webId).then(() => {
-        setCompletedItemsSentences([...completedItemsSentences, "Daily Activity data has been imported."]);
-      });
-    }
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getDailyActivity.isFetched]);
+  // useEffect(() => {
+  //   if (getDailyActivity.isFetched && webId) {
+  //     if (!getDailyActivity.data) return;
+  //     void writeDataIntoPod(podUrlLink ?? "", "dailyActivity", getDailyActivity.data ? [getDailyActivity.data] : [], webId).then(() => {
+  //       setCompletedItemsSentences([...completedItemsSentences, "Daily Activity data has been imported."]);
+  //     });
+  //   }
+  //   //eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [getDailyActivity.isFetched]);
 
-  useEffect(() => {
-    if (getOxygenSaturation.isFetched && webId) {
-      if (!getOxygenSaturation.data) return;
-      void writeDataIntoPod(podUrlLink ?? "", "oxygenSaturation", getOxygenSaturation.data ? [getOxygenSaturation.data] : [], webId).then(() => {
-        setCompletedItemsSentences([...completedItemsSentences, "Oxygen Saturation data has been imported."]);
-      });
-    }
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getOxygenSaturation.isFetched]);
+  // useEffect(() => {
+  //   if (getOxygenSaturation.isFetched && webId) {
+  //     if (!getOxygenSaturation.data) return;
+  //     void writeDataIntoPod(podUrlLink ?? "", "oxygenSaturation", getOxygenSaturation.data ? [getOxygenSaturation.data] : [], webId).then(() => {
+  //       setCompletedItemsSentences([...completedItemsSentences, "Oxygen Saturation data has been imported."]);
+  //     });
+  //   }
+  //   //eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [getOxygenSaturation.isFetched]);
 
   useEffect(() => {
     if (getWeightLog.isFetched && webId) {
@@ -303,11 +303,11 @@ export default function Fitbit() {
         await getSleepLog.refetch();
         await sleep(2500);
       }
-      if (importingItems.includes("Friends")) {
-        await sleep(1000);
-        await getFriends.refetch();
-        await sleep(2500);
-      }
+      // if (importingItems.includes("Friends")) {
+      //   await sleep(1000);
+      //   await getFriends.refetch();
+      //   await sleep(2500);
+      // }
       if (importingItems.includes("Food")) {
         await sleep(1000);
         await getFoodLog.refetch();
@@ -318,41 +318,41 @@ export default function Fitbit() {
         await getWaterLog.refetch();
         await sleep(2500);
       }
-      if (importingItems.includes("Temperature")) {
-        await sleep(1000);
-        await getTemperatureCore.refetch();
-        await sleep(2500);
-      }
-      if (importingItems.includes("Devices")) {
-        await sleep(1000);
-        await getDevices.refetch();
-        await sleep(2500);
-      }
-      if (importingItems.includes("Heart Rate")) {
-        await sleep(1000);
-        await getHeartRate.refetch();
-        await sleep(2500);
-      }
+      // if (importingItems.includes("Temperature")) {
+      //   await sleep(1000);
+      //   await getTemperatureCore.refetch();
+      //   await sleep(2500);
+      // }
+      // if (importingItems.includes("Devices")) {
+      //   await sleep(1000);
+      //   await getDevices.refetch();
+      //   await sleep(2500);
+      // }
+      // if (importingItems.includes("Heart Rate")) {
+      //   await sleep(1000);
+      //   await getHeartRate.refetch();
+      //   await sleep(2500);
+      // }
       if (importingItems.includes("Profile")) {
         await sleep(1000);
         await getProfile.refetch();
         await sleep(2500);
       }
-      if (importingItems.includes("Breathing Rate")) {
-        await sleep(1000);
-        await getBreathingRate.refetch();
-        await sleep(2500);
-      }
-      if (importingItems.includes("Activities")) {
-        await sleep(1000);
-        await getDailyActivity.refetch();
-        await sleep(2500);
-      }
-      if (importingItems.includes("Oxygen Saturation")) {
-        await sleep(1000);
-        await getOxygenSaturation.refetch();
-        await sleep(2500);
-      }
+      // if (importingItems.includes("Breathing Rate")) {
+      //   await sleep(1000);
+      //   await getBreathingRate.refetch();
+      //   await sleep(2500);
+      // }
+      // if (importingItems.includes("Activities")) {
+      //   await sleep(1000);
+      //   await getDailyActivity.refetch();
+      //   await sleep(2500);
+      // }
+      // if (importingItems.includes("Oxygen Saturation")) {
+      //   await sleep(1000);
+      //   await getOxygenSaturation.refetch();
+      //   await sleep(2500);
+      // }
       if (importingItems.includes("Weight")) {
         await sleep(1000);
         await getWeightLog.refetch();

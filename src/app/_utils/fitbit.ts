@@ -2,7 +2,20 @@ import { fetch } from "@inrupt/solid-client-authn-browser";
 import { getSolidDataset, overwriteFile } from "@inrupt/solid-client";
 import { createFolder } from "./wrangle-pods";
 import { api } from "~/trpc/client";
-import { Activity, Breathing, Devices, Food, Friends, HeartRate, OxygenSaturation, Profile, Sleep, Temperature, Water, Weight } from "~/types/Fitbit";
+import type {
+  Activity,
+  Breathing,
+  Devices,
+  Food,
+  Friends,
+  HeartRate,
+  OxygenSaturation,
+  Profile,
+  Sleep,
+  Temperature,
+  Water,
+  Weight,
+} from "~/types/Fitbit";
 
 function getKey(
   type:

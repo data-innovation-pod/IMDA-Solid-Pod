@@ -6,8 +6,8 @@ export async function up(knex: Knex): Promise<void> {
     table.increments("id");
     table.string("web_id").notNullable();
     table.string("service_name").notNullable();
-    table.string("access_token");
-    table.string("refresh_token");
+    table.string("access_token", 1024);
+    table.string("refresh_token", 1024);
     table.string("expires_at");
     table.timestamps(true, true);
   });

@@ -188,58 +188,58 @@ export type HeartActivity = {
 //Profile type, **START**
 export type Profile = {
   user: {
-    aboutMe: any; // Replace 'any' with the appropriate type if known
-    age: any;
-    ambassador: any;
-    autoStrideEnabled: any;
+    aboutMe: string;
+    age: number;
+    ambassador: boolean;
+    autoStrideEnabled: boolean;
     avatar: string;
     avatar150: string;
     avatar640: string;
-    averageDailySteps: any;
-    challengesBeta: any;
-    clockTimeDisplayFormat: any;
-    country: any;
-    corporate: any;
-    corporateAdmin: any;
-    dateOfBirth: any;
-    displayName: any;
-    displayNameSetting: any;
-    distanceUnit: any;
-    encodedId: any;
+    averageDailySteps: number;
+    challengesBeta: boolean;
+    clockTimeDisplayFormat: "12hour" | "24hour";
+    country: string;
+    corporate: boolean;
+    corporateAdmin: boolean;
+    dateOfBirth: string;
+    displayName: string;
+    displayNameSetting: string;
+    distanceUnit: string;
+    encodedId: string;
     features: Features;
-    firstName: any;
-    foodsLocale: any;
-    fullName: any;
-    gender: any;
-    glucoseUnit: any;
-    height: any;
-    heightUnit: any;
-    isBugReportEnabled: any;
-    isChild: any;
-    isCoach: any;
-    languageLocale: any;
-    lastName: any;
-    legalTermsAcceptRequired: any;
-    locale: any;
-    memberSince: any;
-    mfaEnabled: any;
-    offsetFromUTCMillis: any;
-    sdkDeveloper: any;
-    sleepTracking: any;
-    startDayOfWeek: any;
-    state: any;
-    strideLengthRunning: any;
-    strideLengthRunningType: any;
-    strideLengthWalking: any;
-    strideLengthWalkingType: any;
-    swimUnit: any;
-    temperatureUnit: any;
-    timezone: any;
+    firstName: string;
+    foodsLocale: string;
+    fullName: string;
+    gender: string;
+    glucoseUnit: string;
+    height: number;
+    heightUnit: string;
+    isBugReportEnabled: boolean;
+    isChild: boolean;
+    isCoach: boolean;
+    languageLocale: string;
+    lastName: string;
+    legalTermsAcceptRequired: boolean;
+    locale: string;
+    memberSince: string;
+    mfaEnabled: boolean;
+    offsetFromUTCMillis: number;
+    sdkDeveloper: boolean;
+    sleepTracking: string;
+    startDayOfWeek: string;
+    state: string;
+    strideLengthRunning: number;
+    strideLengthRunningType: string;
+    strideLengthWalking: number;
+    strideLengthWalkingType: string;
+    swimUnit: string;
+    temperatureUnit: string;
+    timezone: string;
     topBadges: Badge[];
-    waterUnit: any;
-    waterUnitName: any;
-    weight: any;
-    weightUnit: any;
+    waterUnit: string;
+    waterUnitName: string;
+    weight: number;
+    weightUnit: string;
   };
 };
 
@@ -249,7 +249,7 @@ export type Badge = {
 };
 
 export type Features = {
-  exerciseGoal: any; // Replace 'any' with the appropriate type if known
+  exerciseGoal: boolean; // Replace 'any' with the appropriate type if known
 };
 //**END**
 
@@ -323,8 +323,9 @@ export type Weight = {
   weight: {
     bmi: number;
     date: string;
-    fat: number;
+    fat?: number;
     logId: number;
+    source: string;
     time: string;
     weight: number;
   }[];
