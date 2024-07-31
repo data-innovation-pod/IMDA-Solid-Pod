@@ -61,7 +61,7 @@ export const spotifyRouter = createTRPCRouter({
           client_id: env.SPOTIFY_CLIENT_ID,
           client_secret: env.SPOTIFY_CLIENT_SECRET,
           grant_type: "authorization_code",
-          redirect_uri: env.NEXT_PUBLIC_BASE_URL,
+          redirect_uri: `${env.NEXT_PUBLIC_BASE_URL}/callback/spotify`,
           code_verifier: input.verifier,
         }),
       });
